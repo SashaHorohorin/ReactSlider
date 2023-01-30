@@ -6,6 +6,7 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 .title{
     text-align: center;
     margin-bottom: 2rem;
@@ -35,7 +36,7 @@
     text-align: center;
     position: relative;
     display: flex;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 .person-img{
     border-radius: 50%;
@@ -53,6 +54,7 @@ article{
     height: 100%;
     opacity: 0;
     transition: var(--transition);
+    user-select: none;
 }
 article h4 {
     text-transform: uppercase;
@@ -61,14 +63,14 @@ article h4 {
 
 article.activeSlide{
     opacity: 1;
-    transform: translateX(0);
+    /* transform: translateX(0); */
 }
-article.lastSlide{
+/* article.lastSlide{
     transform: translateX(-100%);
 }
 article.nextSlide{
     transform: translateX(100%);
-}
+} */
 .icon {
     font-size: 3rem;
     margin-top: 1rem; 

@@ -25,6 +25,30 @@ function App() {
     }
   }, [currentIndex])
 
+  let x1 = null;
+  let y1 = null;
+
+  let handleMouseDown = (event) => {
+    x1 = event.clientX;
+    y1 = event.clientY;
+  }
+  let xDiff = 0;
+
+  let handleMouseUp = (event) => {
+    if(!x1 || !y1){
+      return false;
+    }
+    let x2 = event.clientX;
+
+    xDiff = x2 - x1;
+
+    if(xDiff > 0){
+      console.log(setCurrentIndex(prevState => prevState - 1));
+    }else{
+      console.log(setCurrentIndex(prevState => prevState + 1));
+    }
+  }
+
   return (
     <div className="section">
       <div className="title">
@@ -35,20 +59,20 @@ function App() {
       <div className="section-center">
         {people.map((person, personIndex) => {
           const {id, image, name, title} = person;
-
+          let corr = 100;
           let position = 'nextSlide';
           if (personIndex === currentIndex){
             position = 'activeSlide';
+            corr = 0;
           }
 
           if (personIndex === currentIndex - 1 || (currentIndex === 0 && personIndex === people.length - 1)){
             position = 'lastSlide'
+            corr = -100;
           }
-          console.log(image);
-
           return (
-            <article className={position} key={id}>
-              <img src={image} alt={name} className='person-img'/>
+            <article style={{transform: `translateX(${corr}%)`}} className={position} key={id} onMouseDown={(event) => handleMouseDown(event)} onMouseUp={(event) => handleMouseUp(event)} >
+              <img draggable="false" src={image} alt={name} className='person-img'/>
               <h4>{name}</h4>
               <p className="title">{title}</p>
               <FaQuoteRight className='icon'/>
